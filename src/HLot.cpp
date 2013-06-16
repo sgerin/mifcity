@@ -17,6 +17,8 @@ Mesh* loadBuilding()
 		return om.createFromObj("../data/eiffel.obj");
 	#elif __APPLE__
 		return om.createFromObj("data/eiffel.obj");
+    #elif _WIN32
+        return om.createFromObj("../data/eiffel.obj");
 	#endif
 }
 

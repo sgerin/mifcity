@@ -263,20 +263,20 @@ void Mesh::getVertices(Vert*& v, int& size)
         v[i+2].tex[0] = it->texture[2][0];
         v[i+2].tex[1] = it->texture[2][1];
 
-        //        v[i+0].colour[0] = n[0] / 2 + 0.5f;
-        //        v[i+0].colour[1] = n[1] / 2 + 0.5f;
-        //        v[i+0].colour[2] = n[2] / 2 + 0.5f;
-        //        v[i+0].colour[3] = 1.f;
+                //v[i+0].colour[0] = n[0] / 2 + 0.5f;
+                //v[i+0].colour[1] = n[1] / 2 + 0.5f;
+                //v[i+0].colour[2] = n[2] / 2 + 0.5f;
+                //v[i+0].colour[3] = 1.f;
 
-        //        v[i+1].colour[0] = n[0] / 2 + 0.5f;
-        //        v[i+1].colour[1] = n[1] / 2 + 0.5f;
-        //        v[i+1].colour[2] = n[2] / 2 + 0.5f;
-        //        v[i+1].colour[3] = 1.f;
+                //v[i+1].colour[0] = n[0] / 2 + 0.5f;
+                //v[i+1].colour[1] = n[1] / 2 + 0.5f;
+                //v[i+1].colour[2] = n[2] / 2 + 0.5f;
+                //v[i+1].colour[3] = 1.f;
 
-        //        v[i+2].colour[0] = n[0] / 2 + 0.5f;
-        //        v[i+2].colour[1] = n[1] / 2 + 0.5f;
-        //        v[i+2].colour[2] = n[2] / 2 + 0.5f;
-        //        v[i+2].colour[3] = 1.f;
+                //v[i+2].colour[0] = n[0] / 2 + 0.5f;
+                //v[i+2].colour[1] = n[1] / 2 + 0.5f;
+                //v[i+2].colour[2] = n[2] / 2 + 0.5f;
+                //v[i+2].colour[3] = 1.f;
 
         v[i+0].normal[0] = n[0];
         v[i+0].normal[1] = n[1];

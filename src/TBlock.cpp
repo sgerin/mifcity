@@ -9,8 +9,6 @@
 // a
 //
 // c           b
-
-
 TBlock::TBlock(const Vector& a, const Vector& b, const Vector& c)
 {
     TBlock::a = a;
@@ -33,11 +31,11 @@ void TBlock::subdivide(BlockList& bl)
 {
     if (surface() > MIN_SURFACE)
     {
-        int a = rand()%100;
-        if (a < 50)
+        //int a = rand()%100;
+        //if (a < 50)
         T_QTT(bl);
-        else
-        	T_QQT(bl);
+        //else
+        //	T_QQT(bl);
     }
     else
         bl.addBlock(this);
@@ -158,6 +156,17 @@ void TBlock::generateLots(LotList& ll)
 
     Floor* h_floor = new Floor(&inside_a, &inside_b, &inside_c);
     ll.addLot(h_floor);
+
+// <<<<<<< HEAD
+//     //a = a%100;
+//     if (a < 20)
+//         generateResidential(ll, inside_a, inside_b, inside_c);
+//     else if (a < 90)
+//         generateBuilding(ll, inside_a, inside_b, inside_c);
+//     else if (a < 100)
+//         generateRoundTower(ll, inside_a, inside_b, inside_c);
+// =======
+// >>>>>>> e118d48eedbf3ffa41490b34bc1606a4d9d01429
 }
 
 void TBlock::generateResidential(LotList& ll, const Vector& a, const Vector& b, const Vector& c)
@@ -248,10 +257,6 @@ void TBlock::generateRoundTower(LotList& ll, const Vector& inside_a, const Vecto
     Vector center = Vector(x, 0, z);
     float radius = sqrt(((b_dist + c_dist - a_dist)*(c_dist + a_dist - b_dist)*(a_dist + b_dist - c_dist))/(a_dist+b_dist+c_dist))/2;
     //radius /= 2;
-    if(radius != radius)
-    {
-        radius = std::min(std::min(a_dist, b_dist), c_dist);
-    }
 
     RoundTower* rt = new RoundTower(center, radius);
     ll.addLot(rt);

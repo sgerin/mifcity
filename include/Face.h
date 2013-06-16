@@ -7,6 +7,9 @@
     #include <GL/glut.h>
 #elif __APPLE__
 	#include <GLUT/glut.h>
+#else
+    # include <gl/glew.h>
+    # include <gl/glut.h>
 #endif
 
 

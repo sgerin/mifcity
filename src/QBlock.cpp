@@ -138,83 +138,15 @@ void QBlock::subdivide(BlockList& bl)
 {
     if (surface() > MIN_SURFACE)
     {
-        //if too thin
-        /*if (size_u > 2*size_l && size_u > 2*size_r  ||
-            size_d > 2*size_l && size_d > 2*size_r  ||
-            size_l > 2*size_u && size_l > 2*size_d  ||
-            size_r > 2*size_u && size_r > 2*size_d)
-            Q_QQ(bl);
-        if (abs(size_u - size_d) < MIN_SURFACE && abs(size_l-size_r) < MIN_SURFACE)
-        {*/
         int a = rand()%100;
         if (a < 50)
             Q_TTTT(bl);
-        else //if (a < 70)
-            Q_QQQQ(bl);
-        /*else
-                Q_QQ(bl);*/
-        /*}
         else
-            */
+            Q_QQQQ(bl);
     }
     else
         bl.addBlock(this);
 }
-
-//void QBlock::Q_QQT(BlockList& bll)
-//{
-//    int size_r = Norm(ur-dr);
-//    int size_u = Norm(ur-ul);
-//    int size_l = Norm(ul-dl);
-//    int size_d = Norm(dr-dl);
-
-//    Vector sl, sr;
-//    Vector bl, br;
-
-//    if (size_u > size_d)
-//    {
-//        if (size_l>size_r)
-//        {
-//            bl = ur;
-//            br = ul;
-//            sl = dr;
-//            sr = dl;
-//        }
-//        else
-//        {
-//            bl = ul;
-//            br = ur;
-//            sl = dl;
-//            sr = dr;
-//        }
-//    }
-//    else
-//    {
-//        if (size_l > size_r)
-//        {
-//            bl = dr;
-//            br = dl;
-//            sl = ur;
-//            sr = ul;
-//        }
-//        else
-//        {
-//            bl = dl;
-//            br = dr;
-//            sl = ul;
-//            sr = ur;
-//        }
-//    }
-
-//    Vector middle_big = (br+bl)/2;
-//    TBlock* t = new TBlock(sr, br, middle_big);
-//    t->subdivide(bll);
-
-//    QBlock* q = new QBlock(sl, (sl+bl)/2, (middle_big + sr)/2, sr);
-//    q->subdivide(bll);
-//    q = new QBlock((sl+bl)/2, bl, middle_big, (middle_big + sr)/2);
-//    q->subdivide(bll);
-//}
 
 void QBlock::Q_TTTT(BlockList& bl)
 {
@@ -291,92 +223,6 @@ void QBlock::Q_QQQQ(BlockList& bl)
     q->subdivide(bl);
 }
 
-/*void QBlock::Q_QTT(BlockList& bl)
-{
-#ifdef DEBUG
-    std::cout << "Q -> Q T T" << std::endl;
-#endif
-    Vector middle_up = (ur + ul)/2;
-    Vector middle_bot = (dr + dl)/2;
-
-    QBlock* q = new QBlock(dl, middle_up);
-    q->subdivide(bl);
-
-    TBlock* t = new TBlock(ur, middle_bot, dr);
-    t->subdivide(bl);
-
-    t = new TBlock(ur, middle_bot, middle_up);
-    t->subdivide(bl);
-}*/
-
-/*void QBlock::erode(float f, LotList& ll)
-{
-    Vector u = ul - ur;
-    Vector l = dl - ul;
-    Vector u_normal = Vector(u[2], u[1], -u[0]);
-    double dota = u_normal*l;
-
-    Vector d = dr - dl;
-    Vector r = ur - dr;
-
-    Vector l_normal;
-    Vector d_normal;
-    Vector r_normal;
-
-    if(dota > 0)
-    {
-        //CW
-        l_normal = Vector(l[2], l[1], -l[0]);
-        d_normal = Vector(d[2], d[1], -d[0]);
-        r_normal = Vector(r[2], r[1], -r[0]);
-    }
-    else if(dota < 0)
-    {
-        //CCW
-        u_normal[0] = -u_normal[0];
-        u_normal[2] = -u_normal[2];
-        l_normal = Vector(-l[2], l[1], l[0]);
-        d_normal = Vector(-d[2], d[1], d[0]);
-        r_normal = Vector(-r[2], r[1], r[0]);
-    }
-
-    u_normal = Normalized(u_normal);
-    l_normal = Normalized(l_normal);
-    d_normal = Normalized(d_normal);
-    r_normal = Normalized(r_normal);
-
-    Vector ur1 = ur + f*u_normal;
-    Vector ur2 = ur + f*r_normal;
-
-    Vector ul1 = ul + f*u_normal;
-    Vector ul2 = ul + f*l_normal;
-
-    Vector dl1 = dl + f*d_normal;
-    Vector dl2 = dl + f*l_normal;
-
-    Vector dr1 = dr + f*d_normal;
-    Vector dr2 = dr + f*r_normal;
-
-    inside_ur = Intersect(ul1, ur1, dr2, ur2);
-    inside_ul = Intersect(ur1, ul1, dl2, ul2);
-    inside_dr = Intersect(ur2, dr2, dl1, dr1);
-    inside_dl = Intersect(ul2, dl2, dr1, dl1);
-
-    Street* t = new Street(ul, ur, inside_ur, inside_ul);
-    ll.addLot(t);
-
-    t = new Street(inside_ur, ur, dr, inside_dr);
-    ll.addLot(t);
-
-    t = new Street(inside_dl, inside_dr, dr, dl);
-    ll.addLot(t);
-
-    t = new Street(ul, inside_ul, inside_dl, dl);
-    ll.addLot(t);
-
-}*/
-
-//DEBUG
 void QBlock::erode(float f)
 {
     erode(f, &ul, &ur, &dr, &dl);

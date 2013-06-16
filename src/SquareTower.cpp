@@ -28,7 +28,7 @@ void SquareTower::simpleSquareTower(Mesh* m)
 {
     Mesh* components = NULL;
     int nb_storey = FLOORS +(rand() % FLOORS);
-    int type = rand() % 4;
+    int type = rand() % 5;
     switch (type)
     {
     case 0:

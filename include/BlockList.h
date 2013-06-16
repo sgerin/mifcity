@@ -10,8 +10,6 @@ private:
 	std::vector<Block*> blocks;
 	
 public:
-	// ~BlockList();
-		
 	std::vector<Block*> getBlocks() const;
 	void addBlock(Block*);
 
