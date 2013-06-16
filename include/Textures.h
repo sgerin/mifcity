@@ -3,9 +3,8 @@
 
 #define BORDER 0.6
 #define STOREY_HEIGHT 0.6
-#define divide 512.f
 
-// Define some positions for my tex files... 
+#define divide 512.f
 
 #define ROOF1_LEFT_UL_X 228.f
 #define ROOF1_LEFT_UL_Y 511.f

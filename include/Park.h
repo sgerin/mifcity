@@ -7,7 +7,6 @@
 class Park : public Lot
 {
 public:
-	static Mesh* tree;
     Park(const Vector&, const Vector&, const Vector&, const Vector&);
 	Park(const Vector&, const Vector&, const Vector&);
 
@@ -21,7 +20,6 @@ private:
 	Vector dl;
 	Vector dr;
 	bool triangle;
-	static int nb_instance; 
 };
 
 #endif

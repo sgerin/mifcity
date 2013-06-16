@@ -11,7 +11,6 @@ class QBlock : public Block
 public:
 	QBlock(const Vector&, const Vector&);
 	QBlock(const Vector&, const Vector&, const Vector&, const Vector&);
-	// ~QBlock(){}
 
 	void subdivide(BlockList&);
 	Mesh* toMesh();

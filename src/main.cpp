@@ -3,6 +3,12 @@
 #include <GL/glut.h>
 #elif __APPLE__
 #include <GLUT/glut.h>
+#else
+	# include <windows.h>
+	# include <wchar.h>
+    # include <gl/glew.h>
+    # include <gl/glut.h>
+    # define M_PI 3.14159265358979323846
 #endif
 
 #include <vector>
@@ -29,7 +35,7 @@ float rate = 0.1;
 void display() {
     //Color of background. We clear the color and depth buffers before drawing
     glClearColor(0.7f, 0.9f, 1.0f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     GLfloat light0_position[] = { 10.0, 10.0, 1.0, 1.0 };
     GLfloat light0_ambient[] = { 0.1, 0.1, 0.1, 0.1 };
@@ -70,6 +76,7 @@ void display() {
 
     glPopMatrix();
     glutSwapBuffers();
+	glFlush(); 
 }
 
 
@@ -87,11 +94,11 @@ void initGL(Mesh* m)
 
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    glEnable(GL_TEXTURE_2D);
+   // glEnable(GL_TEXTURE_2D);
 
     // Decommenter ces deux lignes pour activer les textures.
-    // windows1 = png_texture_load("atlas.png", NULL, NULL);
-    // glBindTexture(GL_TEXTURE_2D, windows1);
+    windows1 = png_texture_load("atlas.png", NULL, NULL);
+    glBindTexture(GL_TEXTURE_2D, windows1);
 
     //Bind and fill the buffer with the content of our mesh.
     //GL_STATIC_DRAW is here because we don't modify our model
@@ -111,6 +118,8 @@ void initGL(Mesh* m)
     glEnable(GL_LIGHTING);
     glEnable(GL_LIGHT0);
     glEnable(GL_DEPTH_TEST);
+	glDepthMask(GL_TRUE);
+	glEnable(GL_CULL_FACE);
 }
 
 
@@ -129,7 +138,7 @@ void reshape(int w, int h) {
     gluPerspective(45, ratio, 2, 2000);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    gluLookAt(CITY_SIZE, CITY_SIZE, -CITY_SIZE,
+    gluLookAt(CITY_SIZE/4, CITY_SIZE/4, -CITY_SIZE/1.5,
               0.0, 0.0, 0.0,
               0.0, 1.0, 0.0);
 }
@@ -142,9 +151,9 @@ void idle(void) {
 void keyboard(unsigned char key, int x, int y)
 {
     if(key == 'w')
-        glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
+        glPolygonMode( GL_FRONT, GL_LINE );
     else if(key == 'n')
-        glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
+        glPolygonMode( GL_FRONT, GL_FILL );
     else if(key == 'r')
         rotate = !rotate;
     else if(key == 't')
@@ -178,37 +187,23 @@ void specialKeyboard(int key, int x, int y)
     }
 }
 
-
-int main(int argc, char** argv)
-{
-
-    srand(time(NULL));
-
-    Engine e;
+int main(int argc, char** argv){
+	Engine e;
     Mesh* m = e.createCity();
-
-    glutInit(&argc, argv);
-    glutInitDisplayMode(GLUT_RGBA | GLUT_SINGLE | GLUT_DEPTH);
-    glutInitWindowPosition(100, 100);
-    glutInitWindowSize(800, 640);
-    glutCreateWindow("MIFCity");
-    glutDisplayFunc(display);
-    glutIdleFunc(display);
-    glutReshapeFunc(reshape);
+	glutInit(&argc, argv);
+	glutInitDisplayMode(GLUT_RGBA | GLUT_SINGLE | GLUT_DEPTH);
+	glutInitWindowPosition(100, 100);
+	glutInitWindowSize(800, 640);
+	glutCreateWindow("MIFCity");
+	glutDisplayFunc(display); 
+	glutReshapeFunc(reshape);
     glutKeyboardFunc(keyboard);
-    glutSpecialFunc(specialKeyboard);
-    glutIdleFunc(idle);
-    glEnable(GL_DEPTH_TEST);
-#ifndef __APPLE__
-    glewInit();
-#endif
-    initGL(m);
-
-    ObjManager om;
+	glutSpecialFunc(specialKeyboard);
+	glutIdleFunc(idle);
+	glewInit();
+	initGL(m);
+	ObjManager om;
     om.writeToObj(*m, "city.obj");
-
+	glutMainLoop();
     delete m;
-    glutMainLoop();
-
-    return 0;
 }

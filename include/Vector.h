@@ -4,15 +4,15 @@
 #include <cmath>
 #include <iostream>
 
-inline double min(const double& a,const double& b)
-{
-  return (a<b)?a:b;
-}
-
-inline double max(const double& a,const double& b)
-{
-  return (a>b)?a:b;
-}
+//inline double min( double a, double b)
+//{
+//  return (a<b)?a:b;
+//}
+//
+//inline double max( double a, double b)
+//{
+//  return (a>b)?a:b;
+//}
 
 //! \class Vector vector.h
 //! \brief Cette classe définit des vecteurs et des sommets dans l'espace.
@@ -73,8 +73,8 @@ public:
 	friend int operator!=(const Vector&,const Vector&);
 	friend int operator<(const Vector&,const Vector&);
 	friend int operator>(const Vector&,const Vector&);
-	friend Vector min(const Vector&,const Vector&);
-	friend Vector max(const Vector&,const Vector&);
+    //friend Vector min(const Vector&,const Vector&);
+    //friend Vector max(const Vector&,const Vector&);
 
 	friend Vector Orthogonal(const Vector&);
 
@@ -213,23 +213,23 @@ inline int operator>(const Vector& a,const Vector& b)
 	return ((a.x>b.x)&&(a.y>b.y)&&(a.z>b.z));
 }
 
-/*!
-\brief Return a new vector with coordinates set to the minimum coordinates
-of the two argument vectors.
-*/
-inline Vector min(const Vector& a,const Vector& b)
-{
-	return Vector(a[0]<b[0]?a[0]:b[0],a[1]<b[1]?a[1]:b[1],a[2]<b[2]?a[2]:b[2]);
-}
-
-/*!
-\brief Return a new vector with coordinates set to the maximum coordinates
-of the two argument vectors.
-*/
-inline Vector max(const Vector& a,const Vector& b)
-{
-	return Vector(a[0]>b[0]?a[0]:b[0],a[1]>b[1]?a[1]:b[1],a[2]>b[2]?a[2]:b[2]);
-}
+///*!
+//\brief Return a new vector with coordinates set to the minimum coordinates
+//of the two argument vectors.
+//*/
+//inline Vector min(const Vector& a,const Vector& b)
+//{
+//    return Vector(a[0]<b[0]?a[0]:b[0],a[1]<b[1]?a[1]:b[1],a[2]<b[2]?a[2]:b[2]);
+//}
+//
+///*!
+//\brief Return a new vector with coordinates set to the maximum coordinates
+//of the two argument vectors.
+//*/
+//inline Vector max(const Vector& a,const Vector& b)
+//{
+//    return Vector(a[0]>b[0]?a[0]:b[0],a[1]>b[1]?a[1]:b[1],a[2]>b[2]?a[2]:b[2]);
+//}
 
 
 /*!

@@ -1,9 +1,5 @@
 #include "Park.h"
 #include "ObjManager.h"
-#include "Engine.h"
-
-int Park::nb_instance = 0; 
-Mesh* Park::tree = NULL;
 
 Park::Park(const Vector& ul, const Vector& ur, const Vector& dr, const Vector& dl)
 {
@@ -12,21 +8,6 @@ Park::Park(const Vector& ul, const Vector& ur, const Vector& dr, const Vector& d
     Park::dr = dr;
     Park::dl = dl;
 	triangle = false;
-
-	ObjManager om;
-
-	if(Park::nb_instance == 0)
-	{
-		#ifdef __linux
-			//ObjManager om;
-			tree = om.createFromObj("../data/low_poly_tree.obj");
-		#elif __APPLE__
-			//ObjManager om;
-			tree = om.createFromObj("data/low_poly_tree.obj");
-		#endif
-	}
-
-	++Park::nb_instance;
 }
 
 Park::Park(const Vector& a, const Vector& b, const Vector& c)
@@ -35,22 +16,6 @@ Park::Park(const Vector& a, const Vector& b, const Vector& c)
 	ur = b; 
 	dr = c; 
 	triangle = true;
-
-	ObjManager om;
-
-	if(Park::nb_instance == 0)
-	{
-		//ObjManager om;
-		#ifdef __linux
-			//ObjManager om;
-			tree = om.createFromObj("../data/low_poly_tree.obj");
-		#elif __APPLE__
-			//ObjManager om;
-			tree = om.createFromObj("data/low_poly_tree.obj");
-		#endif
-
-	}
-	++Park::nb_instance;
 }
 
 Mesh* Park::elevate()
@@ -61,9 +26,16 @@ Mesh* Park::elevate()
 	Vector pos; 
 	Mesh* trees = new Mesh();
 
-	Mesh* tree = new Mesh();
-	*tree += *Park::tree;
-	//tree->scale(0.4, 0.4, 0.4);
+	ObjManager om;
+
+    #ifdef __linux
+		Mesh* tree = om.createFromObj("../data/low_poly_tree.obj");
+	#elif __APPLE__
+		Mesh* tree = om.createFromObj("data/low_poly_tree.obj");
+    #elif _WIN32
+        Mesh* tree = om.createFromObj("../data/low_poly_tree.obj");
+	#endif
+	tree->scale(0.4, 0.4, 0.4);
 
 	tree->scale(HEIGHT*2, HEIGHT*2, HEIGHT*2);
 	tree->translate(0, HEIGHT/2, 0);
@@ -84,7 +56,7 @@ Mesh* Park::elevate()
 }
 	Mesh* floor;
 	if (triangle)
-		floor = polygon(dr, ur, ul, HEIGHT/2);
+		floor = polygon(ul, ur, dr, HEIGHT/2);
 	else
 		floor = polygon(dl, ul, ur, dr, HEIGHT/2);
 

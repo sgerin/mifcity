@@ -3,7 +3,9 @@
 
 #include <vector>
 #include "Mesh.h"
-
+#ifndef M_PI
+# define M_PI 3.14159265358979323846
+#endif
 inline Mesh* sphere(float radius, int meridians, int parallels)
 {
     Mesh* m = new Mesh();
@@ -67,37 +69,22 @@ inline Mesh* cylinder(float radius, float length, int slices)
     Mesh* m = new Mesh();
     double x, y, z;
 
-    if(radius != radius)
-	std::cout << "NAN" << std::endl;
-
     m->addVertex(0.0, length, 0.0);
     m->addVertex(0.0, 0, 0.0);
 
     for(int i=0; i < slices; ++i)
     {
-        if(i==0)
-            x = radius*cos(0);
-        else
-            x = radius * cos(2*M_PI*(i/slices));
+        x = radius * cos(2*M_PI*i/slices);
         y = length;
-        if(i==0)
-            z = radius*sin(0);
-        else
-            z = radius * sin(2*M_PI*(i/slices));
+        z = radius * sin(2*M_PI*i/slices);
         m->addVertex(x, y, z);
     }
 
     for(int i=0; i < slices; ++i)
     {
-        if(i==0)
-            x = radius*cos(0);
-        else
-            x = radius * cos(2*M_PI*(i/slices));
+        x = radius * cos(2*M_PI*i/slices);
         y = 0;
-        if(i==0)
-            z = radius*sin(0);
-        else
-            z = radius * sin(2*M_PI*(i/slices));
+        z = radius * sin(2*M_PI*i/slices);
         m->addVertex(x, y, z);
     }
 

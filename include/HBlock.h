@@ -10,7 +10,6 @@ class HBlock : public Block
 {
 public:
 	HBlock(const Vector&, const Vector&, const Vector&, const Vector&);
-	// ~HBlock();
 
 	void subdivide(BlockList&);
 	Mesh* toMesh();

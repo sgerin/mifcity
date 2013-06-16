@@ -10,8 +10,6 @@ private:
 	std::vector<Lot*> lots;
 	
 public:
-	//~LotList();
-	
 	std::vector<Lot*> getLots() const;
 	void addLot(Lot*);
 

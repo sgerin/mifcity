@@ -22,8 +22,6 @@ class LotList;
 class Block
 {
 public:
-	// virtual ~Block();
-
 	virtual void subdivide(BlockList&) = 0;
 	virtual void generateLots(LotList&) = 0;
 

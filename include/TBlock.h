@@ -9,7 +9,6 @@ class TBlock : public Block
 {
 public:
     TBlock(const Vector& a, const Vector& b, const Vector& c);
-    // ~TBlock(){}
 
 	void subdivide(BlockList&);
 	Mesh* toMesh();
